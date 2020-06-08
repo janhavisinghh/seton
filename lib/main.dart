@@ -33,6 +33,9 @@ class NotesApp extends StatelessWidget {
 }
 
 class CreateNoteScreen extends StatelessWidget {
+  final FocusNode _titleFocusNode = new FocusNode();
+  final FocusNode _noteFocusNode = new FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,21 +55,28 @@ class CreateNoteScreen extends StatelessWidget {
             children: <Widget>[
               new Flexible(
                 child: new TextField(
+                  focusNode: _titleFocusNode,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: 'Heading..'),
                   style: TextStyle(fontSize: 28),
                   maxLength: 100,
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: () =>
+                      FocusScope.of(context).requestFocus(_noteFocusNode),
                 ),
               ),
               new Flexible(
                 child: new TextField(
+                  focusNode: _noteFocusNode,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Start writing your note..'),
+                  textInputAction: TextInputAction.done,
+                  onEditingComplete: () => onSaveClicked(),
                 ),
               ),
             ],
@@ -75,11 +85,13 @@ class CreateNoteScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
           icon: Icon(Icons.save_alt),
           label: Text('Save'),
-          onPressed: () {
-            print('Save Clicked');
-          },
+          onPressed: () => onSaveClicked(),
         ),
       ),
     );
+  }
+
+  void onSaveClicked() {
+    print('Save Clicked');
   }
 }
