@@ -57,6 +57,7 @@ class CreateNoteScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: 'Heading..'),
                   style: TextStyle(fontSize: 28),
+                  maxLength: 100,
                 ),
               ),
               new Flexible(
