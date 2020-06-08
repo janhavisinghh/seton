@@ -46,8 +46,30 @@ class CreateNoteScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body: Center(
-          child: Text('Create New Note Screen'),
+        body: Container(
+          padding: const EdgeInsets.all(20),
+          child: new Column(
+            children: <Widget>[
+              new Flexible(
+                child: new TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                      border: InputBorder.none, hintText: 'Heading..'),
+                  style: TextStyle(fontSize: 28),
+                ),
+              ),
+              new Flexible(
+                child: new TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Start writing your note..'),
+                ),
+              ),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton.extended(
           icon: Icon(Icons.save_alt),
